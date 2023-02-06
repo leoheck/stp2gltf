@@ -58,8 +58,6 @@ OCC_LIB = -lPTKernel \
 	-lTKV3d
 
 
-
-
 CFLAGS:= -g -I/usr/include/oce -I./microjson -L./microjson
 
 all: stp2gltf
