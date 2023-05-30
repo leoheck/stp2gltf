@@ -15,11 +15,11 @@ LoadFace::LoadFace(TopoDS_Face &pFace){
   TopLoc_Location loc = pFace.Location();
   Handle(Poly_Triangulation) triangulation = BRep_Tool::Triangulation(pFace, loc);
   gp_Trsf transform = loc;
-  const TColgp_Array1OfPnt& arrPolyNodes = triangulation->Nodes();
+  const Poly_ArrayOfNodes& arrPolyNodes = triangulation->InternalNodes();
   const Poly_Array1OfTriangle& arrTriangles = triangulation->Triangles();
   gp_Pnt transformedPoint;
   for(i = 0; i < triangulation->NbNodes();i++){
-    transformedPoint = arrPolyNodes(i+1).Transformed(transform);
+    transformedPoint = arrPolyNodes[i].Transformed(transform);
     pt.x = transformedPoint.X();
     pt.y = transformedPoint.Y();
     pt.z = transformedPoint.Z();

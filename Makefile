@@ -1,7 +1,7 @@
 SRCS:= main.cpp LoadStep.cpp LoadFace.cpp Accessor.cpp
 OBJS:= $(patsubst %.cpp, %.o, $(SRCS))
 
-OCC_LIB = -lPTKernel \
+OCC_LIB = \
 	-lTKBin \
 	-lTKBinL \
 	-lTKBinTObj \
@@ -24,16 +24,9 @@ OCC_LIB = -lPTKernel \
 	-lTKMath \
 	-lTKMesh \
 	-lTKMeshVS \
-	-lTKNIS \
 	-lTKOffset \
-	-lTKPCAF \
-	-lTKPLCAF \
 	-lTKPrim \
-	-lTKPShape \
-	-lTKShapeSchema \
 	-lTKShHealing \
-	-lTKStdLSchema \
-	-lTKStdSchema \
 	-lTKSTEP209 \
 	-lTKSTEP \
 	-lTKSTEPAttr \
@@ -41,10 +34,8 @@ OCC_LIB = -lPTKernel \
 	-lTKSTL \
 	-lTKTObj \
 	-lTKTopAlgo \
-	-lTKVoxel \
 	-lTKVRML \
 	-lTKXCAF \
-	-lTKXCAFSchema \
 	-lTKXDEIGES \
 	-lTKXDESTEP \
 	-lTKXMesh \
@@ -57,8 +48,9 @@ OCC_LIB = -lPTKernel \
 	-lTKOpenGl \
 	-lTKV3d
 
+CFLAGS:= -g -I/usr/include/opencascade -I./microjson -L./microjson
 
-CFLAGS:= -g -I/usr/include/oce -I./microjson -L./microjson
+.PHONY: all test clean distclean
 
 all: stp2gltf
 
@@ -73,10 +65,14 @@ microjson:
 %.o: %.cpp
 	g++ $(CFLAGS) -c $^
 
-
 clean:
 	rm -f *.o
 	rm -f stp2gltf
+	rm -f *.gltf
+	rm -f *.bin
 
 distclean: clean
 	rm -rf microjson
+
+test:
+	./stp2gltf test.stp test.gltf test.bin

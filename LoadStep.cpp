@@ -59,6 +59,8 @@ void LoadStep::loadColors(Handle(XSControl_WorkSession) pWS){
   STEPConstruct_Styles Styles(pWS);
   Handle(StepVisual_StyledItem) style;
   Handle(StepVisual_Colour) surf, bound, curv;
+  Handle(StepVisual_Colour) render_col;
+  Standard_Real render_transp;
   Handle(TColStd_HSequenceOfTransient) invis;
   Standard_Boolean comp = false;
   int i;
@@ -94,7 +96,7 @@ void LoadStep::loadColors(Handle(XSControl_WorkSession) pWS){
     shape = STEPConstruct::FindShape(Styles.TransientProcess(), style->Item());
     hascolor = false;
     if(!style.IsNull() && invisible == false){
-      if(Styles.GetColors(style, surf, bound, curv, comp)){
+      if(Styles.GetColors(style, surf, bound, curv, render_col, render_transp, comp)){
 	if(!surf.IsNull()){
 	  Styles.DecodeColor(surf,col);
 	  hascolor = true;
