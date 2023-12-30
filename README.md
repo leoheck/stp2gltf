@@ -10,16 +10,21 @@ This also requires microjson which requires flex and bison. Microjson is automat
 Outside of that it should have basically no other library requires and compiles under c++98. The following dependencies will do it:
 
 ```bash
-sudo apt-get install libocct-foundation-dev flex bison
+make install_dependencies
 ```
 
-To build:
-```
+Building:
+```bash
 make
 ```
 
-To run:
+Testing:
+```bash
+make test
 ```
+
+Running:
+```bash
 ./stp2gltf stp gltf bin
 ```
 

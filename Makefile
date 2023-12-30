@@ -76,3 +76,10 @@ distclean: clean
 
 test:
 	./stp2gltf test.stp test.gltf test.bin
+
+install_dependencies:
+	sudo apt install -y flex
+	sudo apt install -y bison
+	sudo apt install -y libocct-foundation-dev
+	sudo apt install -y libocct-ocaf-dev
+	sudo apt install -y libocct-data-exchange-dev
